@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Available Pets</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Available Pets for Adoption</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="#">Pets</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="filter-bar">
+      <div style="display: flex; gap: 24px; justify-content: center">
+        Type:
+        <div style="display: flex;">
+          <div><input type="checkbox" id="type-dogs" name="pet-type" value="Dog" checked/> Dogs</div>
+          <div><input type="checkbox" id="type-cats" name="pet-type" value="Cat" checked/> Cats</div>
+          <div><input type="checkbox" id="type-capybaras" name="pet-type" value="Capybara" checked/> Capybaras</div>
+          <div><input type="checkbox" id="type-birds" name="pet-type" value="Bird" checked/> Birds</div>
+        </div>
+      </div>
+    </div>
+    <div id="all-pets" class="pet-grid"></div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
