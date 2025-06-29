@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <title>Car accessories</title>
+
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+
+
+
+    <link rel="stylesheet" type="text/css" href="Accessories.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+   
+    <script>
+    	var lastest_totalPrice = 0;
+        function addItem() {
+        	// query 
+            var selectedAccessory = $('#accessories option:selected').text();
+            var price = $('#price-input').val();
+            var quantity = $('#amount-input').val();
+
+            var newRow = `<tr>
+            	<td>${quantity}</td>
+	            <td><button onclick="removeItem(this)">x</button> ${selectedAccessory}</td>
+	            <td>${price}</td>
+	            <td>${price*quantity}</td>
+            </tr>`;
+            // <td>${(price * quantity * 0.07).toFixed(2)}</td>
+
+            $('#productList').append(newRow);
+
+            lastest_totalPrice += price * quantity;
+
+            $('#totalPrice').text(lastest_totalPrice.toFixed(2)).css("font-weight", "bold");
+            $('#vatAmount').text((lastest_totalPrice * 0.07).toFixed(2)).css("font-weight", "bold");
+            $('#netAmount').text((lastest_totalPrice + (lastest_totalPrice * 0.07)).toFixed(2)).css("font-weight", "bold");
+        }
+        function removeItem(r) {
+		  	var i = r.parentNode.parentNode.rowIndex;
+  			var table = document.getElementById("productList");
+  			var price_before = document.getElementsByTagName("tr")[i].getElementsByTagName("td")[3].innerHTML;
+  			table.deleteRow(i)
+
+  			// var totalPrice_before = $('#totalPrice').text();
+  			var totalPrice = lastest_totalPrice - price_before;
+  			$('#totalPrice').text(totalPrice.toFixed(2)).css("font-weight", "bold");
+  			$('#vatAmount').text((totalPrice * 0.07).toFixed(2)).css("font-weight", "bold");
+  			$('#netAmount').text((totalPrice + (totalPrice * 0.07)).toFixed(2)).css("font-weight", "bold");
+  			lastest_totalPrice -= price_before;
+		}
+		function hideModal() {
+		    var myModal = bootstrap.Modal.getOrCreateInstance(document.getElementById('myModal'));
+			myModal.hide();
+		}
+    </script>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4"><h2><b>Car accessories</b></h2></div>
+		</div>
+		<div class="row">
+		  <div class="col-sm-4">Bangsauthong</div>
+		</div>
+		<div class="row">
+		  <div class="col-sm-4">Samutprakarn</div>
+		</div>
+		<div class="row">
+		  <div class="col-sm-4">THAILAND</div>
+		</div>
+		<div class="row">
+		  <div class="col-sm-4">30000</div>
+		</div>
+		<div class="row">
+		  <div class="col-sm-4">TEL : 1150</div>
+		</div>
+		<div class="row">
+		  <div class="col-sm-4">FAX : 1234</div>
+		</div>
+		<br>
+		<div class="row">
+		  <div class="col-sm-4"><h4>Customer :<h4></div>
+		  <div class="col-sm-4"><h4>Ship to :<h4></div>
+		  <div class="col-sm-4"><b>Sat July 20 2024</b></div>
+		</div>
+		<div class="row">
+		  <div class="col-sm-4"><b>Tony Stark</b></div>
+		  <div class="col-sm-4"><b>Annonymous</b></div>
+		  <div class="col-sm-4"></div>
+		</div>
+		<div class="row">
+		  <div class="col-sm-4">address line 1</div>
+		  <div class="col-sm-4">address line 1</div>
+		  <div class="col-sm-4"></div>
+		</div>
+		<div class="row">
+		  <div class="col-sm-4">address line 2</div>
+		  <div class="col-sm-4">address line 2</div>
+		  <div class="col-sm-4"></div>
+		</div>
+		<div class="row">
+		  <div class="col-sm-4">address line 3</div>
+		  <div class="col-sm-4">address line 3</div>
+		  <div class="col-sm-4"></div>
+		</div><br>
+	</div>
+    
+    
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+	    Add item
+	  </button>
+    <table id="productList"> 
+        <tr> 
+			<th>Quantity</th>
+            <th>Description</th> 
+            <th>Unit Price</th> 
+            <th>Amount</th> 
+            <!-- <th>VAT</th>  -->
+        </tr>
+		<tfoot style="border-width: 0.01px;">
+			<tr>
+				<td></td><td></td>
+				<td><b>Subtotal</b></td>
+				<td id="totalPrice"><b>0</b></td>
+			</tr> 
+			<tr style="border-width: 0.01px;">
+				<td></td><td></td>
+				<td><b>VAT</b></td>
+				<td id="vatAmount"><b>0</b></td>
+			</tr> 
+			<tr>
+				<td></td><td></td>
+				<td><b>Total Due</b></td>
+				<td id="netAmount"><b>0</b></td>
+			</tr> 
+		</tfoot>
+    </table>
+
+
+	<!-- The Modal -->
+	<div class="modal" id="myModal">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+
+	      <!-- Modal Header -->
+	      <div class="modal-header">
+	        <h4 class="modal-title">Add Car</h4>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+	      </div>
+
+	      <!-- Modal body -->
+	      <div class="modal-body">
+	        <label for="accessories">Choose an accessory:</label> 
+	        <select id="accessories"> 
+	            <option>Benz</option> 
+	            <option>Audi</option> 
+	            <option>BMW</option> 
+				<option>Honda</option>
+				<option>toyota</option> 
+				<option>Nissan</option>
+				<option>Tesla</option> 
+				<option>Porche</option>
+	        </select>
+		    <br><br>
+		    <label for="price">Accessory Price ($):</label> 
+		    <input type="number" id="price-input" min="1" value="1">
+		    <br><br> 
+		    <label for="amount">Quantity:</label> 
+		    <input type="number" id="amount-input" min="1" value="1">
+		    <br>
+	      </div>
+
+	      <!-- Modal footer -->
+	      <div class="modal-footer">
+	      	<button type="button" class="btn btn-primary" onclick="addItem();hideModal();">Add</button>
+	        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+	      </div>
+
+	    </div>
+	  </div>
+	</div>
+
+</body>
+</html>
